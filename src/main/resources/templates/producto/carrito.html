@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Obaju : e-commerce template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->		
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <!-- Font Awesome CSS-->	
+    <link rel="stylesheet" th:href="@{/vendor/font-awesome/css/font-awesome.min.css}">
+    <!-- Google fonts - Roboto -->	
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700">
+    <!-- owl carousel-->	
+    <link rel="stylesheet" th:href="@{/vendor/owl.carousel/assets/owl.carousel.css}">
+    <link rel="stylesheet" th:href="@{/vendor/owl.carousel/assets/owl.theme.default.css}">
+    <!-- theme stylesheet-->	
+    <link rel="stylesheet" th:href="@{/css/style.default.css}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+    <!-- Favicon-->	
+    <link rel="shortcut icon" href="favicon.png">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+
+<body>
+	<!--<nav th:replace="fragments/cabecera.html :: cabecera" />-->
+	<!--  <body th:insert="fragments/cabecera.html :: cabecera"> -->
+	<header th:insert="fragments/cabecera.html :: cabecera"> </header>
+	
+   
+   
+    <div id="all">
+      <div id="content">
+        <div class="container">
+          <div class="row">
+            <div id="basket" class="col-lg-9">
+              <div class="box">
+                <form method="post" action="checkout1.html">
+                  <h1>Carrito</h1>
+                  <div class="table-responsive">
+                  
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Producto</th>
+                          <th>Cantidad</th>
+                          <th>Precio unidad</th>
+                    <!--  <th>Descuento</th>	 -->
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      
+
+                        <tr th:each="detalleProducto : ${session.listaProductoDetalle}">
+                        
+                        <!--   <td><img th:src="@{img/detailsquare.jpg" alt="White Blouse Armani"></td>--> 
+                          <td><a th:href="@{/productos/detalle/{id}(id=${detalleProducto.producto.id})}" ><span th:text="${detalleProducto.producto.nombre}"></span> </a></td>
+                          <td><span th:text="${detalleProducto.detallePedido.unidades}"></span></td>
+                          <td><span th:text="${detalleProducto.producto.precio}"></span></td>
+                    <!--  <td>$0.00</td> DESCUENTO (tabla a parte en la BD)-->
+                          <td><span th:text="${detalleProducto.detallePedido.total}"></span></td>
+                          
+                       	  <td><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                        </tr>
+                        
+                        
+                        
+                       </tbody>
+                        <tfoot>
+                        <tr>
+                          <th colspan="3">Total</th>
+                          <th colspan="2"><span th:text="${session.pedido.total}"></span></th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                    
+                  </div>
+                  
+                  
+                  
+                  
+                  
+                  <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
+                    <div class="left"><a th:href="@{/}" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Seguir comprando</a></div>
+                    <div class="right">
+                      <a th:href="@{/productos/carrito}" class="btn btn-outline-secondary"><i class="fa fa-refresh"></i> Refrescar el carrito</a>
+                      <a th:href="@{/productos/carrito/redirigir}" class="btn btn-primary"> Pasarela de pago<i class="fa fa-chevron-right"></i></a>
+                      
+                      
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+			
+          </div>
+        </div>
+      </div>
+    </div>
+	
+	<footer th:insert="fragments/pie-de-pagina.html :: pie-de-pagina"></footer>
+</body>
+</html>
